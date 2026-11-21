@@ -1,0 +1,6 @@
+Your reply to the guest failed these automatic checks:
+{problems}
+
+Write the reply again so it passes every check. Keep what was right. If you can't answer something from the guest
+information page or the booking system results, say a colleague will follow up and hand off instead of guessing.
+Reply with only the JSON object.
