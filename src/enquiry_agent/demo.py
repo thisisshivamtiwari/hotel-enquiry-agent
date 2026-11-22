@@ -7,8 +7,9 @@ import time
 
 from . import experiment
 
-SHOW = (("b02", "haiku-4.5"), ("b10", "sonnet-5.5"), ("i01", "haiku-4.5"), ("c03", "sonnet-5.5"))
 SETUPS = ("oneshot", "tools", "guarded")
+BROKEN = ("tools", "tools_fault", "guarded_fault")
+SHOW = (("b02", "haiku-4.5", SETUPS), ("b01", "sonnet-5.5", BROKEN), ("c03", "sonnet-5.5", SETUPS))
 NAMES = {
     "oneshot": "ONE-SHOT",
     "tools": "TOOLS",
@@ -29,18 +30,18 @@ def main(pause: float = 0.5) -> None:
     audit = experiment.load_audit()
     by = {(r["model"], r["setup"], r["id"]): r for r in rows}
     _say("HOTEL  Fernhollow House (made-up)  ·  today: Mon 1 Feb 2027  ·  booking system: a local fake API", pause)
-    for eid, model in SHOW:
-        first = by[(model, "oneshot", eid)]
+    for eid, model, setups in SHOW:
+        first = by[(model, setups[0], eid)]
         _say()
         _say(f"GUEST ({first['channel']})  " + " ".join(first["guest"].split())[:150], pause)
-        for setup in SETUPS:
+        for setup in setups:
             r = by[(model, setup, eid)]
             why = experiment.reason(r, audit)
             verdict = "READY" if why is None else f"NOT READY: {why}"
             extra = f", {len(r['lookups'])} lookup(s)" if r["lookups"] else ""
             extra += ", repaired" if r["repaired"] else ""
             extra += ", safe fallback" if r["fell_back"] else ""
-            _say(f"  {NAMES[setup]:<10}{model:<11} -> {verdict}  (handoff: {r['handoff']}{extra})", pause / 2)
+            _say(f"  {NAMES[setup]:<20}{model:<11} -> {verdict}  (handoff: {r['handoff']}{extra})", pause / 2)
             for line in textwrap.wrap(r["reply"].replace("\n", " "), 92)[:2]:
                 _say(f"      {line}", pause / 6)
     _say()
