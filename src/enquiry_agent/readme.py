@@ -13,7 +13,7 @@ SETUP_NAMES = {
 }
 MODEL_NAMES = {"haiku-4.5": "Haiku 4.5", "sonnet-5.5": "Sonnet 5.5"}
 KIND_NAMES = {
-    "booking": "availability and price (19)",
+    "booking": "availability and price (17)",
     "group_event": "groups and events (5)",
     "complaint": "complaints (6)",
     "refund_change": "refunds, changes, cancellations (6)",

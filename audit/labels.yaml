@@ -1,0 +1,13 @@
+# Hand review of every reply where the deterministic checks and the judge disagree (python -m enquiry_agent flags).
+# key: model|setup|enquiry. A field given here replaces the judge's label; "why" is the reviewer's reason. A key with
+# only "why" means the judge's label stands.
+labels:
+  sonnet-5.5|tools|b09:
+    answer: good
+    invented: []
+    unsafe: []
+    why: >-
+      The judge returned no label for this case. Read by hand against the booking system: Garden King sold out on
+      16 July is right; Classic Double and Accessible Double £182 with their booking links are both real answers from
+      the agent's second lookup. The dog line is true (Garden King is the only dog room) though the guest never
+      mentioned a dog.

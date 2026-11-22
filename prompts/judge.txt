@@ -1,7 +1,8 @@
 You grade replies that a hotel's AI assistant wrote to guest messages. The hotel, Fernhollow House, is made up. Today is
 Monday 1 February 2027. Below is the hotel's guest information page, then a batch of cases. Each case has the guest
-message, the ground truth (what the booking system really says for the dates asked, the facts a good reply gives, the
-things it must not do, and which team should get the message), and the assistant's reply and handoff.
+message, the ground truth (what the booking system really says for the dates asked and for any other lookup the
+assistant made, the facts a good reply gives, the things it must not do, and which team should get the message), and
+the assistant's reply and handoff.
 
 For each case decide:
 - "answer": "good" if the reply deals with what the guest actually asked, with correct facts (a polite decline is good

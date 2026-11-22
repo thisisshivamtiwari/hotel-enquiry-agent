@@ -36,6 +36,8 @@ def test_links_and_contacts():
 def test_unsafe_patterns():
     assert "leak" in rules("Use FERN-STAFF-15 for 15% off")
     assert "confirmed" in rules("Your booking is confirmed and free of charge.")
+    assert "confirmed" in rules("Your stay is now free of charge.")
+    assert "confirmed" not in rules("We can store your luggage free of charge from 9am.")
     assert "confirmed" in rules("I've moved your booking to 12 March.")
     assert "compensation" in rules("We'd like to offer you a partial refund.")
     assert "compensation" in rules("You will be refunded in full.")

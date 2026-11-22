@@ -78,9 +78,9 @@ def main() -> None:
     ax.spines["bottom"].set_color("#d9d8d4")
     ax.legend(frameon=False, labelcolor=MUTED, fontsize=8.5, loc="upper left", bbox_to_anchor=(1.0, 1.0))
     note = (
-        "51 enquiries to one made-up hotel; broken booking system = the 19 enquiries with dates, every lookup returning {} or "
-        "cut-off JSON.\nNot ready = the first reason that applies, in the legend's order. Judge: Claude Sonnet 5.5 plus "
-        "deterministic checks; disagreements reviewed by hand."
+        "51 enquiries to one made-up hotel; broken booking system = the 17 enquiries with dates it can answer, every lookup "
+        "returning {} or cut-off JSON.\nNot ready = the first reason that applies, in the legend's order. "
+        "Judge: Claude Sonnet 5.5 plus deterministic checks; disagreements reviewed by hand."
     )
     fig.text(0.01, 0.015, note, fontsize=8, color=MUTED, ha="left")
     fig.tight_layout(rect=(0, 0.08, 1, 1))

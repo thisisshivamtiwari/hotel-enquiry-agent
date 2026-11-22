@@ -27,6 +27,9 @@ CLAIMED_LOOKUP = re.compile(
     r"|\bI can see (that )?(we|there)\b|\blooked (it )?up\b",
     re.I,
 )
+# "please verify" / "check the details" lines aimed at the reader; the CLI applies account-level instructions to every
+# call, and they ask for this caveat (see STUDY.md, confounders)
+VERIFY_LINE = re.compile(r"\bverif(y|ied)\b|double-check|\bplease (do )?check\b|check the (details|final)", re.I)
 SCORED_HARD = {"url", "contact", "leak", "confirmed", "compensation", "not-sendable", "tool-text", "empty"}
 
 
@@ -44,12 +47,26 @@ def truth(e: dict) -> list[dict]:
     return [api.check_availability(**a) for a in e.get("asks", [])]
 
 
-def truth_text(e: dict) -> str:
+def own_asks(conv: dict, setup: str) -> list[dict]:
+    """The lookups the agent made itself (other dates, a child counted, a room type). With the normal booking system
+    their answers are real, so a price or link from them is grounded too; with the broken one nothing came back."""
+    if setup.endswith("_fault"):
+        return []
+    return [s["call"] for s in conv["lookups"] if "check_in" in s["call"]]
+
+
+def grounded(e: dict, conv: dict, setup: str) -> list[dict]:
+    """Every real booking-system answer a reply may quote: the enquiry's own dates plus the agent's lookups."""
+    real = [] if setup.endswith("_fault") else truth(e)
+    return real + [api.check_availability(**a) for a in own_asks(conv, setup)]
+
+
+def truth_text(asks: list[dict]) -> str:
     lines = []
-    for a, r in zip(e.get("asks", []), truth(e), strict=True):
+    for a, r in zip(asks, [api.check_availability(**a) for a in asks], strict=True):
         ask = (
-            f"{a['check_in']}, {a['nights']} night(s), {a['adults']} adult(s), {a.get('children', 0)} child(ren), "
-            f"{a.get('rooms', 1)} room(s)"
+            f"{a['check_in']}, {a['nights']} night(s), {a['adults']} adult(s), {a.get('children') or 0} child(ren), "
+            f"{a.get('rooms') or 1} room(s)" + (f", {a['room_type']} only" if a.get("room_type") else "")
         )
         if "error" in r:
             lines.append(f"- {ask}: {r['message']}")
@@ -58,7 +75,10 @@ def truth_text(e: dict) -> str:
         for o in r["options"]:
             if o["available"]:
                 nightly = ", ".join(f"£{n['rate']}" for n in o["nightly_rate_per_room"])
-                opts.append(f"{o['name']} FREE (per room per night {nightly}; total £{o['total_for_all_rooms']})")
+                opts.append(
+                    f"{o['name']} FREE (per room per night {nightly}; total £{o['total_for_all_rooms']}; booking link "
+                    f"{o['book_url']})"
+                )
             else:
                 opts.append(f"{o['name']} SOLD OUT (nights {', '.join(o['sold_out_nights'])})")
         lines.append(f"- {ask}: " + "; ".join(opts) + " (rooms that don't fit the party aren't listed)")
@@ -76,13 +96,21 @@ def needs_link(e: dict, setup: str) -> bool:
 
 def score(e: dict, setup: str, conv: dict) -> dict:
     reply = conv["reply"]
-    problems = checks.check(reply, [] if setup.endswith("_fault") else truth(e), e["text"])
+    facts = grounded(e, conv, setup)
+    problems = checks.check(reply, facts, e["text"])
     urls = [u.rstrip(".,;:!?") for u in checks.URL.findall(reply or "")]
     return {
         "problems": problems,
-        "link": any(u in checks.booking_urls(truth(e)) for u in urls),
+        "link": any(u in checks.booking_urls(truth(e) + facts) for u in urls),
         "claimed_lookup": bool(CLAIMED_LOOKUP.search(reply or "")) and not conv["lookups"],
     }
+
+
+def expected_handoff(e: dict, setup: str) -> list[str]:
+    """With the booking system broken, passing a dated enquiry to reservations is also right: someone has to confirm."""
+    if setup.endswith("_fault") and "reservations" not in e["handoff"]:
+        return [*e["handoff"], "reservations"]
+    return e["handoff"]
 
 
 def ask(alias: str, e: dict, setup: str) -> dict:
@@ -95,7 +123,7 @@ def ask(alias: str, e: dict, setup: str) -> dict:
         "kind": e["kind"],
         "channel": e["channel"],
         "guest": e["text"].strip(),
-        "expected_handoff": e["handoff"],
+        "expected_handoff": expected_handoff(e, setup),
         **conv,
         "needs_link": needs_link(e, setup),
         "checks": score(e, setup, conv),
@@ -112,12 +140,15 @@ def judge(rows: list[dict]) -> float:
         if r["setup"].endswith("_fault"):
             lines.append("THE BOOKING SYSTEM WAS DOWN in this case (it returned a broken answer).")
         if e.get("asks"):
-            lines.append("BOOKING SYSTEM, REAL ANSWER for the dates asked:\n" + truth_text(e))
+            lines.append("BOOKING SYSTEM, REAL ANSWER for the dates asked:\n" + truth_text(e["asks"]))
+        extra = [a for a in own_asks(r, r["setup"]) if api.check_availability(**a) not in truth(e)]
+        if extra:
+            lines.append("BOOKING SYSTEM, REAL ANSWER for the other lookups the assistant made:\n" + truth_text(extra))
         if e.get("must"):
             lines.append("A GOOD REPLY GIVES: " + "; ".join(e["must"]))
         if e.get("avoid"):
             lines.append("MUST NOT: " + "; ".join(e["avoid"]))
-        lines.append(f"RIGHT TEAM: {' or '.join(e['handoff'])}")
+        lines.append(f"RIGHT TEAM: {' or '.join(r['expected_handoff'])}")
         lines.append(f"ASSISTANT HANDOFF: {r['handoff']}\nASSISTANT REPLY:\n{r['reply']}")
         cases.append("\n".join(lines))
     system = (ROOT / "prompts" / "judge.txt").read_text().replace("{policy}", api.policy())
@@ -312,8 +343,19 @@ def summarise(rows: list[dict]) -> dict:
         for a, b in (("oneshot", "tools"), ("tools", "guarded"), ("oneshot", "guarded"), ("tools_fault", "guarded_fault")):
             if outcome[a] and outcome[b]:
                 tests[f"{model}|{a}|{b}"] = mcnemar(outcome[a], outcome[b])
+    faults = {}
+    for r in rows:
+        if r["setup"] == "tools_fault" and r["lookups"]:
+            kind = "empty" if r["lookups"][0]["result"] == "{}" else "cut_off"
+            k = f"{r['model']}|{kind}"
+            faults.setdefault(k, [0, 0])
+            faults[k][0] += bool(final(r, audit)["invented"])
+            faults[k][1] += 1
+    verify = Counter(f"{r['model']}|{r['setup']}" for r in rows if VERIFY_LINE.search(r["reply"]))
     flagged = [r for r in rows if r["flags"]]
     return {
+        "tools_fault_invented_by_result": faults,
+        "verify_lines": dict(verify),
         "table": table,
         "by_kind": by_kind,
         "ready_mcnemar_p": tests,

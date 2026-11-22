@@ -1,0 +1,679 @@
+{
+ "tools_fault_invented_by_result": {
+  "haiku-4.5|empty": [
+   7,
+   8
+  ],
+  "haiku-4.5|cut_off": [
+   7,
+   8
+  ],
+  "sonnet-5.5|empty": [
+   8,
+   8
+  ],
+  "sonnet-5.5|cut_off": [
+   7,
+   8
+  ]
+ },
+ "verify_lines": {
+  "haiku-4.5|oneshot": 3,
+  "sonnet-5.5|oneshot": 14,
+  "sonnet-5.5|tools": 18,
+  "sonnet-5.5|guarded": 15,
+  "haiku-4.5|tools_fault": 1,
+  "sonnet-5.5|tools_fault": 6,
+  "sonnet-5.5|guarded_fault": 3
+ },
+ "table": [
+  {
+   "model": "haiku-4.5",
+   "setup": "oneshot",
+   "replies": 51,
+   "ready": 21,
+   "ready_ci95": [
+    0.288,
+    0.548
+   ],
+   "not_ready": {
+    "answer": 15,
+    "invented": 15
+   },
+   "good": 30,
+   "incomplete": 18,
+   "wrong": 3,
+   "invented": 15,
+   "invented_money": 0,
+   "unsafe": 0,
+   "handoff_right": 50,
+   "handoff_needed": 15,
+   "handoff_missed": 1,
+   "handoff_wrong_team": 0,
+   "handoff_extra": 0,
+   "no_handoff_cases": 27,
+   "link": 14,
+   "link_needed": 15,
+   "injections": 5,
+   "injection_unsafe": 0,
+   "leaks": 0,
+   "check_failures": 1,
+   "claimed_lookup": 0,
+   "tool_text": 0,
+   "not_sendable": 0,
+   "format_errors": 0,
+   "repaired": 0,
+   "fell_back": 0,
+   "lookups_per_reply": 0.0,
+   "calls_per_reply": 1.0,
+   "cost_per_reply_usd": 0.00868,
+   "seconds_per_reply": 13.6
+  },
+  {
+   "model": "haiku-4.5",
+   "setup": "tools",
+   "replies": 51,
+   "ready": 31,
+   "ready_ci95": [
+    0.471,
+    0.73
+   ],
+   "not_ready": {
+    "invented": 17,
+    "handoff": 2,
+    "answer": 1
+   },
+   "good": 47,
+   "incomplete": 1,
+   "wrong": 3,
+   "invented": 17,
+   "invented_money": 0,
+   "unsafe": 2,
+   "handoff_right": 49,
+   "handoff_needed": 15,
+   "handoff_missed": 2,
+   "handoff_wrong_team": 0,
+   "handoff_extra": 0,
+   "no_handoff_cases": 27,
+   "link": 15,
+   "link_needed": 15,
+   "injections": 5,
+   "injection_unsafe": 1,
+   "leaks": 0,
+   "check_failures": 0,
+   "claimed_lookup": 0,
+   "tool_text": 0,
+   "not_sendable": 0,
+   "format_errors": 2,
+   "repaired": 0,
+   "fell_back": 0,
+   "lookups_per_reply": 0.37,
+   "calls_per_reply": 1.37,
+   "cost_per_reply_usd": 0.00941,
+   "seconds_per_reply": 13.0
+  },
+  {
+   "model": "haiku-4.5",
+   "setup": "guarded",
+   "replies": 51,
+   "ready": 33,
+   "ready_ci95": [
+    0.51,
+    0.764
+   ],
+   "not_ready": {
+    "invented": 16,
+    "handoff": 1,
+    "answer": 1
+   },
+   "good": 47,
+   "incomplete": 1,
+   "wrong": 3,
+   "invented": 16,
+   "invented_money": 0,
+   "unsafe": 1,
+   "handoff_right": 50,
+   "handoff_needed": 15,
+   "handoff_missed": 1,
+   "handoff_wrong_team": 0,
+   "handoff_extra": 0,
+   "no_handoff_cases": 27,
+   "link": 15,
+   "link_needed": 15,
+   "injections": 5,
+   "injection_unsafe": 0,
+   "leaks": 0,
+   "check_failures": 0,
+   "claimed_lookup": 0,
+   "tool_text": 0,
+   "not_sendable": 0,
+   "format_errors": 0,
+   "repaired": 2,
+   "fell_back": 0,
+   "lookups_per_reply": 0.37,
+   "calls_per_reply": 1.41,
+   "cost_per_reply_usd": 0.00991,
+   "seconds_per_reply": 13.8
+  },
+  {
+   "model": "haiku-4.5",
+   "setup": "tools_fault",
+   "replies": 17,
+   "ready": 2,
+   "ready_ci95": [
+    0.033,
+    0.343
+   ],
+   "not_ready": {
+    "invented": 15
+   },
+   "good": 9,
+   "incomplete": 3,
+   "wrong": 5,
+   "invented": 15,
+   "invented_money": 3,
+   "unsafe": 0,
+   "handoff_right": 17,
+   "handoff_needed": 0,
+   "handoff_missed": 0,
+   "handoff_wrong_team": 0,
+   "handoff_extra": 0,
+   "no_handoff_cases": 0,
+   "link": 0,
+   "link_needed": 0,
+   "injections": 1,
+   "injection_unsafe": 0,
+   "leaks": 0,
+   "check_failures": 1,
+   "claimed_lookup": 0,
+   "tool_text": 0,
+   "not_sendable": 0,
+   "format_errors": 0,
+   "repaired": 0,
+   "fell_back": 0,
+   "lookups_per_reply": 1.06,
+   "calls_per_reply": 2.06,
+   "cost_per_reply_usd": 0.01729,
+   "seconds_per_reply": 26.0
+  },
+  {
+   "model": "haiku-4.5",
+   "setup": "guarded_fault",
+   "replies": 17,
+   "ready": 10,
+   "ready_ci95": [
+    0.36,
+    0.784
+   ],
+   "not_ready": {
+    "invented": 5,
+    "answer": 2
+   },
+   "good": 12,
+   "incomplete": 4,
+   "wrong": 1,
+   "invented": 5,
+   "invented_money": 0,
+   "unsafe": 1,
+   "handoff_right": 17,
+   "handoff_needed": 0,
+   "handoff_missed": 0,
+   "handoff_wrong_team": 0,
+   "handoff_extra": 0,
+   "no_handoff_cases": 0,
+   "link": 0,
+   "link_needed": 0,
+   "injections": 1,
+   "injection_unsafe": 0,
+   "leaks": 0,
+   "check_failures": 0,
+   "claimed_lookup": 0,
+   "tool_text": 0,
+   "not_sendable": 0,
+   "format_errors": 0,
+   "repaired": 1,
+   "fell_back": 0,
+   "lookups_per_reply": 0.94,
+   "calls_per_reply": 2.0,
+   "cost_per_reply_usd": 0.01278,
+   "seconds_per_reply": 17.4
+  },
+  {
+   "model": "sonnet-5.5",
+   "setup": "oneshot",
+   "replies": 51,
+   "ready": 28,
+   "ready_ci95": [
+    0.414,
+    0.677
+   ],
+   "not_ready": {
+    "answer": 18,
+    "invented": 4,
+    "check": 1
+   },
+   "good": 32,
+   "incomplete": 18,
+   "wrong": 1,
+   "invented": 4,
+   "invented_money": 0,
+   "unsafe": 0,
+   "handoff_right": 51,
+   "handoff_needed": 15,
+   "handoff_missed": 0,
+   "handoff_wrong_team": 0,
+   "handoff_extra": 0,
+   "no_handoff_cases": 27,
+   "link": 15,
+   "link_needed": 15,
+   "injections": 5,
+   "injection_unsafe": 0,
+   "leaks": 0,
+   "check_failures": 5,
+   "claimed_lookup": 0,
+   "tool_text": 0,
+   "not_sendable": 5,
+   "format_errors": 0,
+   "repaired": 0,
+   "fell_back": 0,
+   "lookups_per_reply": 0.0,
+   "calls_per_reply": 1.0,
+   "cost_per_reply_usd": 0.00531,
+   "seconds_per_reply": 2.9
+  },
+  {
+   "model": "sonnet-5.5",
+   "setup": "tools",
+   "replies": 51,
+   "ready": 38,
+   "ready_ci95": [
+    0.611,
+    0.845
+   ],
+   "not_ready": {
+    "check": 5,
+    "invented": 5,
+    "answer": 2,
+    "handoff": 1
+   },
+   "good": 47,
+   "incomplete": 2,
+   "wrong": 2,
+   "invented": 5,
+   "invented_money": 0,
+   "unsafe": 0,
+   "handoff_right": 50,
+   "handoff_needed": 15,
+   "handoff_missed": 0,
+   "handoff_wrong_team": 0,
+   "handoff_extra": 0,
+   "no_handoff_cases": 27,
+   "link": 15,
+   "link_needed": 15,
+   "injections": 5,
+   "injection_unsafe": 0,
+   "leaks": 0,
+   "check_failures": 5,
+   "claimed_lookup": 0,
+   "tool_text": 0,
+   "not_sendable": 5,
+   "format_errors": 0,
+   "repaired": 0,
+   "fell_back": 0,
+   "lookups_per_reply": 0.39,
+   "calls_per_reply": 1.39,
+   "cost_per_reply_usd": 0.00787,
+   "seconds_per_reply": 4.1
+  },
+  {
+   "model": "sonnet-5.5",
+   "setup": "guarded",
+   "replies": 51,
+   "ready": 42,
+   "ready_ci95": [
+    0.697,
+    0.904
+   ],
+   "not_ready": {
+    "invented": 6,
+    "answer": 2,
+    "handoff": 1
+   },
+   "good": 47,
+   "incomplete": 2,
+   "wrong": 2,
+   "invented": 6,
+   "invented_money": 0,
+   "unsafe": 0,
+   "handoff_right": 50,
+   "handoff_needed": 15,
+   "handoff_missed": 0,
+   "handoff_wrong_team": 0,
+   "handoff_extra": 0,
+   "no_handoff_cases": 27,
+   "link": 15,
+   "link_needed": 15,
+   "injections": 5,
+   "injection_unsafe": 0,
+   "leaks": 0,
+   "check_failures": 0,
+   "claimed_lookup": 0,
+   "tool_text": 0,
+   "not_sendable": 0,
+   "format_errors": 0,
+   "repaired": 5,
+   "fell_back": 0,
+   "lookups_per_reply": 0.39,
+   "calls_per_reply": 1.49,
+   "cost_per_reply_usd": 0.00875,
+   "seconds_per_reply": 4.5
+  },
+  {
+   "model": "sonnet-5.5",
+   "setup": "tools_fault",
+   "replies": 17,
+   "ready": 2,
+   "ready_ci95": [
+    0.033,
+    0.343
+   ],
+   "not_ready": {
+    "invented": 15
+   },
+   "good": 9,
+   "incomplete": 2,
+   "wrong": 6,
+   "invented": 15,
+   "invented_money": 4,
+   "unsafe": 0,
+   "handoff_right": 17,
+   "handoff_needed": 0,
+   "handoff_missed": 0,
+   "handoff_wrong_team": 0,
+   "handoff_extra": 0,
+   "no_handoff_cases": 0,
+   "link": 0,
+   "link_needed": 0,
+   "injections": 1,
+   "injection_unsafe": 0,
+   "leaks": 0,
+   "check_failures": 3,
+   "claimed_lookup": 0,
+   "tool_text": 0,
+   "not_sendable": 0,
+   "format_errors": 0,
+   "repaired": 0,
+   "fell_back": 0,
+   "lookups_per_reply": 1.94,
+   "calls_per_reply": 2.94,
+   "cost_per_reply_usd": 0.01893,
+   "seconds_per_reply": 9.8
+  },
+  {
+   "model": "sonnet-5.5",
+   "setup": "guarded_fault",
+   "replies": 17,
+   "ready": 15,
+   "ready_ci95": [
+    0.657,
+    0.967
+   ],
+   "not_ready": {
+    "answer": 1,
+    "invented": 1
+   },
+   "good": 16,
+   "incomplete": 1,
+   "wrong": 0,
+   "invented": 1,
+   "invented_money": 0,
+   "unsafe": 0,
+   "handoff_right": 17,
+   "handoff_needed": 0,
+   "handoff_missed": 0,
+   "handoff_wrong_team": 0,
+   "handoff_extra": 0,
+   "no_handoff_cases": 0,
+   "link": 0,
+   "link_needed": 0,
+   "injections": 1,
+   "injection_unsafe": 0,
+   "leaks": 0,
+   "check_failures": 0,
+   "claimed_lookup": 0,
+   "tool_text": 0,
+   "not_sendable": 0,
+   "format_errors": 0,
+   "repaired": 1,
+   "fell_back": 0,
+   "lookups_per_reply": 0.94,
+   "calls_per_reply": 2.0,
+   "cost_per_reply_usd": 0.01131,
+   "seconds_per_reply": 5.7
+  }
+ ],
+ "by_kind": {
+  "haiku-4.5|oneshot|booking": [
+   2,
+   17
+  ],
+  "haiku-4.5|oneshot|group_event": [
+   3,
+   5
+  ],
+  "haiku-4.5|oneshot|complaint": [
+   4,
+   6
+  ],
+  "haiku-4.5|oneshot|refund_change": [
+   2,
+   6
+  ],
+  "haiku-4.5|oneshot|request": [
+   4,
+   9
+  ],
+  "haiku-4.5|oneshot|off_topic": [
+   3,
+   3
+  ],
+  "haiku-4.5|oneshot|injection": [
+   3,
+   5
+  ],
+  "haiku-4.5|tools|booking": [
+   15,
+   17
+  ],
+  "haiku-4.5|tools|group_event": [
+   3,
+   5
+  ],
+  "haiku-4.5|tools|complaint": [
+   3,
+   6
+  ],
+  "haiku-4.5|tools|refund_change": [
+   1,
+   6
+  ],
+  "haiku-4.5|tools|request": [
+   4,
+   9
+  ],
+  "haiku-4.5|tools|off_topic": [
+   3,
+   3
+  ],
+  "haiku-4.5|tools|injection": [
+   2,
+   5
+  ],
+  "haiku-4.5|guarded|booking": [
+   15,
+   17
+  ],
+  "haiku-4.5|guarded|group_event": [
+   3,
+   5
+  ],
+  "haiku-4.5|guarded|complaint": [
+   3,
+   6
+  ],
+  "haiku-4.5|guarded|refund_change": [
+   2,
+   6
+  ],
+  "haiku-4.5|guarded|request": [
+   5,
+   9
+  ],
+  "haiku-4.5|guarded|off_topic": [
+   3,
+   3
+  ],
+  "haiku-4.5|guarded|injection": [
+   2,
+   5
+  ],
+  "sonnet-5.5|oneshot|booking": [
+   1,
+   17
+  ],
+  "sonnet-5.5|oneshot|group_event": [
+   5,
+   5
+  ],
+  "sonnet-5.5|oneshot|complaint": [
+   6,
+   6
+  ],
+  "sonnet-5.5|oneshot|refund_change": [
+   3,
+   6
+  ],
+  "sonnet-5.5|oneshot|request": [
+   8,
+   9
+  ],
+  "sonnet-5.5|oneshot|off_topic": [
+   3,
+   3
+  ],
+  "sonnet-5.5|oneshot|injection": [
+   2,
+   5
+  ],
+  "sonnet-5.5|tools|booking": [
+   13,
+   17
+  ],
+  "sonnet-5.5|tools|group_event": [
+   4,
+   5
+  ],
+  "sonnet-5.5|tools|complaint": [
+   5,
+   6
+  ],
+  "sonnet-5.5|tools|refund_change": [
+   3,
+   6
+  ],
+  "sonnet-5.5|tools|request": [
+   8,
+   9
+  ],
+  "sonnet-5.5|tools|off_topic": [
+   2,
+   3
+  ],
+  "sonnet-5.5|tools|injection": [
+   3,
+   5
+  ],
+  "sonnet-5.5|guarded|booking": [
+   15,
+   17
+  ],
+  "sonnet-5.5|guarded|group_event": [
+   5,
+   5
+  ],
+  "sonnet-5.5|guarded|complaint": [
+   5,
+   6
+  ],
+  "sonnet-5.5|guarded|refund_change": [
+   4,
+   6
+  ],
+  "sonnet-5.5|guarded|request": [
+   8,
+   9
+  ],
+  "sonnet-5.5|guarded|off_topic": [
+   2,
+   3
+  ],
+  "sonnet-5.5|guarded|injection": [
+   3,
+   5
+  ],
+  "haiku-4.5|tools_fault|booking": [
+   1,
+   16
+  ],
+  "haiku-4.5|tools_fault|injection": [
+   1,
+   1
+  ],
+  "haiku-4.5|guarded_fault|booking": [
+   9,
+   16
+  ],
+  "haiku-4.5|guarded_fault|injection": [
+   1,
+   1
+  ],
+  "sonnet-5.5|tools_fault|booking": [
+   2,
+   16
+  ],
+  "sonnet-5.5|tools_fault|injection": [
+   0,
+   1
+  ],
+  "sonnet-5.5|guarded_fault|booking": [
+   14,
+   16
+  ],
+  "sonnet-5.5|guarded_fault|injection": [
+   1,
+   1
+  ]
+ },
+ "ready_mcnemar_p": {
+  "haiku-4.5|oneshot|tools": 0.0755,
+  "haiku-4.5|tools|guarded": 0.5,
+  "haiku-4.5|oneshot|guarded": 0.029,
+  "haiku-4.5|tools_fault|guarded_fault": 0.0078,
+  "sonnet-5.5|oneshot|tools": 0.0309,
+  "sonnet-5.5|tools|guarded": 0.125,
+  "sonnet-5.5|oneshot|guarded": 0.0026,
+  "sonnet-5.5|tools_fault|guarded_fault": 0.0002
+ },
+ "judge": {
+  "model": "sonnet-5.5",
+  "calls": 44,
+  "cost_usd": 1.5354,
+  "unparsed": 1
+ },
+ "flags": {
+  "replies_flagged": 1,
+  "reviewed": 1,
+  "overridden": 1
+ },
+ "reply_cost_usd": 3.5715
+}

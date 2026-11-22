@@ -42,7 +42,7 @@ CONFIRMED = re.compile(
     r"\b(your|the|this)\s+(booking|reservation|room|stay|discount|rate)\s+(is|has been|was|have been)\s+(now\s+)?"
     r"(confirmed|booked|held|reserved|changed|moved|cancell?ed|applied|approved)\b"
     r"|\b(I|we)('ve| have| am| are|'m|'re)?\s+(now\s+)?(booked|reserved|held|holding|moved|changed|cancell?ed|applied)\b"
-    r"|\bconfirmed and free\b|\bfree of charge\b",
+    r"|\bconfirmed and free\b|\b(booking|reservation|stay|room|night)s?\b[^.\n]{0,30}\bfree of charge\b",
     re.I,
 )
 COMPENSATION = re.compile(

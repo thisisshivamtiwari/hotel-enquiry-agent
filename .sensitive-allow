@@ -1,0 +1,6 @@
+# Exact strings the secrets/PII scan may allow. Synthetic only.
+# Made-up hotel phone numbers (Fernhollow House, data/hotel.yaml) from Ofcom's drama range 01632 960xxx, never real numbers;
+# 960999 is the fake number a unit test expects the contact check to reject.
+01632 960117
+01632 960118
+01632 960999

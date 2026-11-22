@@ -44,7 +44,7 @@ def main(pause: float = 0.5) -> None:
             for line in textwrap.wrap(r["reply"].replace("\n", " "), 92)[:2]:
                 _say(f"      {line}", pause / 6)
     _say()
-    _say("RESULTS  51 made-up enquiries (19 with dates for the broken-API runs); ready = could go to the guest as is", pause)
+    _say("RESULTS  51 made-up enquiries (17 with dates for the broken-API runs); ready = could go to the guest as is", pause)
     summary = json.loads((experiment.RESULTS / "summary.json").read_text())
     _say(f"  {'model':<11}{'setup':<20}{'ready':>8}{'invented':>10}{'unsafe':>8}{'handoff ok':>12}{'$/reply':>9}{'s/reply':>9}")
     for r in summary["table"]:
