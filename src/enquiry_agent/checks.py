@@ -16,6 +16,8 @@ Each problem is {"rule", "detail"}. The rules:
 - compensation: offers or promises a refund, discount, voucher, credit or free stay
 - not-sendable: a note to the hotel instead of the guest ("verify before sending", "[name]", "Note:")
 - tool-text:  a tool call written into the reply as text
+- availability: "sold out", "fully booked", "no rooms" when no booking-system answer shows a sold-out room (an empty
+              or failed lookup is not a sold-out night)
 - empty:      no reply
 """
 
@@ -55,7 +57,15 @@ COMPENSATION = re.compile(
 )
 NOT_SENDABLE = re.compile(r"before sending|please verify|\bverify (all|the|these|this)\b|^\W*note:|\[[^\]]*\]", re.I | re.M)
 TOOL_TEXT = re.compile(r"check_availability|\"tool\"\s*:", re.I)
-HARD = {"money", "per-night", "url", "contact", "leak", "confirmed", "compensation", "not-sendable", "tool-text", "empty"}
+SOLD_OUT = re.compile(
+    r"\bsold[ -]out\b|\bfully booked\b|\bno (rooms?|availability|vacancies)\b|\bnothing (left|free|available)\b"
+    r"|\b(rooms?|double|king|suite|it)\b[^.\n]{0,25}\b(isn't|is not|aren't|are not|not) (available|free)\b",
+    re.I,
+)
+HARD = {
+    "money", "per-night", "url", "contact", "leak", "confirmed", "compensation", "not-sendable", "tool-text", "availability",
+    "empty",
+}  # fmt: skip
 
 
 def amount(raw: str) -> float | None:
@@ -94,6 +104,10 @@ def allowed_money(lookups: list[dict], guest_text: str) -> set[float]:
     room_totals = totals | {t / k for t in totals for k in range(1, 5)}
     base = rates | rate_multiples | room_totals | extras | set(amounts(guest_text))
     return base | {t + e for t in room_totals | rate_multiples for e in extras}
+
+
+def sold_out_seen(lookups: list[dict]) -> bool:
+    return any(o.get("available") is False for r in lookups if isinstance(r, dict) for o in r.get("options", []))
 
 
 def booking_urls(lookups: list[dict]) -> set[str]:
@@ -143,6 +157,9 @@ def check(reply: str | None, lookups: list[dict], guest_text: str) -> list[dict]
             problems.append({"rule": rule, "detail": repr(m.group(0))})
     if TOOL_TEXT.search(reply):
         problems.append({"rule": "tool-text", "detail": "a tool call written into the reply"})
+    m = SOLD_OUT.search(reply)
+    if m and not sold_out_seen(lookups):
+        problems.append({"rule": "availability", "detail": f"{m.group(0)!r}, but no booking-system answer shows a sold-out room"})
     return problems
 
 

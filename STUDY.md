@@ -127,3 +127,23 @@ rules were scoped to Sonnet after Haiku broke two of them, and the README says s
 10. **Why record and replay model calls?** CI reruns the whole experiment for free in about a second, fails if any
     prompt, data or scoring change moves the results without a new recorded run, and enforces the gate rules. It also
     lets anyone reproduce the tables without a key.
+11. **An empty answer from a tool: is it "no rooms" or "unknown"?** Unknown, unless the tool's contract says empty
+    means none. Here the API always lists every room type that fits the party, free or not, so an empty or partial
+    list is a failure, not an answer. The guard sorts each lookup into verified, missing (the search lacked an input)
+    or failed, and only verified answers can back a price, a link or "sold out". On the 16 fault fixtures the 22 Nov
+    guard handled 27 of 44 cases; it let "we have no rooms free" through after every failure. The new one handles
+    44/44 (results/faults.json), and the recorded run still reproduces, so it costs no ready replies.
+12. **What can't the guard catch?** A stale price for the same search: the answer has the right dates and shape, and
+    without a quote timestamp nothing shows it's old. The fixtures catch stale answers for other dates or party sizes
+    only. Fix: a `quoted_at` field and a max-age rule.
+
+## 7. Fault fixtures (23 Nov)
+
+- Why a scripted model: the question is whether the code around the model holds when the model writes the worst
+  plausible draft and ignores the repair request. A real model would test how often it writes those drafts, which the
+  recorded broken-system run already measures for one failure kind.
+- Why "the right price from memory" is a failing draft: after a failed lookup the price is unverified even when it
+  happens to be correct; tomorrow's tariff change makes it wrong with nothing to catch it.
+- Found while building: a tool call without nights or adults raised `TypeError` and stopped the run; it is now a
+  bad_request answer the model can recover from.
+- Each fixture also runs on the 22 Nov guard, so the before/after numbers come from the same code path.

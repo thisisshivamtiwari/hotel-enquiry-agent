@@ -1,0 +1,1118 @@
+{
+ "fixtures": [
+  {
+   "id": "timeout",
+   "kind": "failed-dependency",
+   "what": "no answer in time",
+   "state": "failed",
+   "shape_check_accepts": false,
+   "drafts": {
+    "no-rooms": {
+     "caught": [
+      "availability",
+      "handoff"
+     ],
+     "sent_as_written": false,
+     "fell_back": true,
+     "handoff": "reservations",
+     "unconfirmed_left": [],
+     "pass": true
+    },
+    "price": {
+     "caught": [
+      "money",
+      "money",
+      "per-night",
+      "handoff"
+     ],
+     "sent_as_written": false,
+     "fell_back": true,
+     "handoff": "reservations",
+     "unconfirmed_left": [],
+     "pass": true
+    },
+    "honest": {
+     "caught": [],
+     "sent_as_written": true,
+     "fell_back": false,
+     "handoff": "reservations",
+     "unconfirmed_left": [],
+     "pass": true
+    }
+   },
+   "legacy": {
+    "no-rooms": {
+     "caught": [
+      "handoff"
+     ],
+     "sent_as_written": true,
+     "fell_back": false,
+     "handoff": "reservations",
+     "unconfirmed_left": [
+      "availability"
+     ],
+     "pass": false
+    },
+    "price": {
+     "caught": [
+      "money",
+      "money",
+      "per-night",
+      "handoff"
+     ],
+     "sent_as_written": false,
+     "fell_back": true,
+     "handoff": "reservations",
+     "unconfirmed_left": [],
+     "pass": true
+    },
+    "honest": {
+     "caught": [],
+     "sent_as_written": true,
+     "fell_back": false,
+     "handoff": "reservations",
+     "unconfirmed_left": [],
+     "pass": true
+    }
+   }
+  },
+  {
+   "id": "refused",
+   "kind": "failed-dependency",
+   "what": "connection refused",
+   "state": "failed",
+   "shape_check_accepts": false,
+   "drafts": {
+    "no-rooms": {
+     "caught": [
+      "availability",
+      "handoff"
+     ],
+     "sent_as_written": false,
+     "fell_back": true,
+     "handoff": "reservations",
+     "unconfirmed_left": [],
+     "pass": true
+    },
+    "price": {
+     "caught": [
+      "money",
+      "money",
+      "per-night",
+      "handoff"
+     ],
+     "sent_as_written": false,
+     "fell_back": true,
+     "handoff": "reservations",
+     "unconfirmed_left": [],
+     "pass": true
+    },
+    "honest": {
+     "caught": [],
+     "sent_as_written": true,
+     "fell_back": false,
+     "handoff": "reservations",
+     "unconfirmed_left": [],
+     "pass": true
+    }
+   },
+   "legacy": {
+    "no-rooms": {
+     "caught": [
+      "handoff"
+     ],
+     "sent_as_written": true,
+     "fell_back": false,
+     "handoff": "reservations",
+     "unconfirmed_left": [
+      "availability"
+     ],
+     "pass": false
+    },
+    "price": {
+     "caught": [
+      "money",
+      "money",
+      "per-night",
+      "handoff"
+     ],
+     "sent_as_written": false,
+     "fell_back": true,
+     "handoff": "reservations",
+     "unconfirmed_left": [],
+     "pass": true
+    },
+    "honest": {
+     "caught": [],
+     "sent_as_written": true,
+     "fell_back": false,
+     "handoff": "reservations",
+     "unconfirmed_left": [],
+     "pass": true
+    }
+   }
+  },
+  {
+   "id": "error-page",
+   "kind": "failed-dependency",
+   "what": "an HTML error page",
+   "state": "failed",
+   "shape_check_accepts": false,
+   "drafts": {
+    "no-rooms": {
+     "caught": [
+      "availability",
+      "handoff"
+     ],
+     "sent_as_written": false,
+     "fell_back": true,
+     "handoff": "reservations",
+     "unconfirmed_left": [],
+     "pass": true
+    },
+    "price": {
+     "caught": [
+      "money",
+      "money",
+      "per-night",
+      "handoff"
+     ],
+     "sent_as_written": false,
+     "fell_back": true,
+     "handoff": "reservations",
+     "unconfirmed_left": [],
+     "pass": true
+    },
+    "honest": {
+     "caught": [],
+     "sent_as_written": true,
+     "fell_back": false,
+     "handoff": "reservations",
+     "unconfirmed_left": [],
+     "pass": true
+    }
+   },
+   "legacy": {
+    "no-rooms": {
+     "caught": [
+      "handoff"
+     ],
+     "sent_as_written": true,
+     "fell_back": false,
+     "handoff": "reservations",
+     "unconfirmed_left": [
+      "availability"
+     ],
+     "pass": false
+    },
+    "price": {
+     "caught": [
+      "money",
+      "money",
+      "per-night",
+      "handoff"
+     ],
+     "sent_as_written": false,
+     "fell_back": true,
+     "handoff": "reservations",
+     "unconfirmed_left": [],
+     "pass": true
+    },
+    "honest": {
+     "caught": [],
+     "sent_as_written": true,
+     "fell_back": false,
+     "handoff": "reservations",
+     "unconfirmed_left": [],
+     "pass": true
+    }
+   }
+  },
+  {
+   "id": "empty-object",
+   "kind": "failed-dependency",
+   "what": "{}",
+   "state": "failed",
+   "shape_check_accepts": false,
+   "drafts": {
+    "no-rooms": {
+     "caught": [
+      "availability",
+      "handoff"
+     ],
+     "sent_as_written": false,
+     "fell_back": true,
+     "handoff": "reservations",
+     "unconfirmed_left": [],
+     "pass": true
+    },
+    "price": {
+     "caught": [
+      "money",
+      "money",
+      "per-night",
+      "handoff"
+     ],
+     "sent_as_written": false,
+     "fell_back": true,
+     "handoff": "reservations",
+     "unconfirmed_left": [],
+     "pass": true
+    },
+    "honest": {
+     "caught": [],
+     "sent_as_written": true,
+     "fell_back": false,
+     "handoff": "reservations",
+     "unconfirmed_left": [],
+     "pass": true
+    }
+   },
+   "legacy": {
+    "no-rooms": {
+     "caught": [
+      "handoff"
+     ],
+     "sent_as_written": true,
+     "fell_back": false,
+     "handoff": "reservations",
+     "unconfirmed_left": [
+      "availability"
+     ],
+     "pass": false
+    },
+    "price": {
+     "caught": [
+      "money",
+      "money",
+      "per-night",
+      "handoff"
+     ],
+     "sent_as_written": false,
+     "fell_back": true,
+     "handoff": "reservations",
+     "unconfirmed_left": [],
+     "pass": true
+    },
+    "honest": {
+     "caught": [],
+     "sent_as_written": true,
+     "fell_back": false,
+     "handoff": "reservations",
+     "unconfirmed_left": [],
+     "pass": true
+    }
+   }
+  },
+  {
+   "id": "cut-off",
+   "kind": "failed-dependency",
+   "what": "JSON cut off part way",
+   "state": "failed",
+   "shape_check_accepts": false,
+   "drafts": {
+    "no-rooms": {
+     "caught": [
+      "availability",
+      "handoff"
+     ],
+     "sent_as_written": false,
+     "fell_back": true,
+     "handoff": "reservations",
+     "unconfirmed_left": [],
+     "pass": true
+    },
+    "price": {
+     "caught": [
+      "money",
+      "money",
+      "per-night",
+      "handoff"
+     ],
+     "sent_as_written": false,
+     "fell_back": true,
+     "handoff": "reservations",
+     "unconfirmed_left": [],
+     "pass": true
+    },
+    "honest": {
+     "caught": [],
+     "sent_as_written": true,
+     "fell_back": false,
+     "handoff": "reservations",
+     "unconfirmed_left": [],
+     "pass": true
+    }
+   },
+   "legacy": {
+    "no-rooms": {
+     "caught": [
+      "handoff"
+     ],
+     "sent_as_written": true,
+     "fell_back": false,
+     "handoff": "reservations",
+     "unconfirmed_left": [
+      "availability"
+     ],
+     "pass": false
+    },
+    "price": {
+     "caught": [
+      "money",
+      "money",
+      "per-night",
+      "handoff"
+     ],
+     "sent_as_written": false,
+     "fell_back": true,
+     "handoff": "reservations",
+     "unconfirmed_left": [],
+     "pass": true
+    },
+    "honest": {
+     "caught": [],
+     "sent_as_written": true,
+     "fell_back": false,
+     "handoff": "reservations",
+     "unconfirmed_left": [],
+     "pass": true
+    }
+   }
+  },
+  {
+   "id": "empty-list",
+   "kind": "failed-dependency",
+   "what": "right shape, no room types listed",
+   "state": "failed",
+   "shape_check_accepts": true,
+   "drafts": {
+    "no-rooms": {
+     "caught": [
+      "availability",
+      "handoff"
+     ],
+     "sent_as_written": false,
+     "fell_back": true,
+     "handoff": "reservations",
+     "unconfirmed_left": [],
+     "pass": true
+    },
+    "price": {
+     "caught": [
+      "money",
+      "money",
+      "per-night",
+      "handoff"
+     ],
+     "sent_as_written": false,
+     "fell_back": true,
+     "handoff": "reservations",
+     "unconfirmed_left": [],
+     "pass": true
+    },
+    "honest": {
+     "caught": [],
+     "sent_as_written": true,
+     "fell_back": false,
+     "handoff": "reservations",
+     "unconfirmed_left": [],
+     "pass": true
+    }
+   },
+   "legacy": {
+    "no-rooms": {
+     "caught": [],
+     "sent_as_written": true,
+     "fell_back": false,
+     "handoff": "none",
+     "unconfirmed_left": [
+      "availability"
+     ],
+     "pass": false
+    },
+    "price": {
+     "caught": [
+      "money",
+      "money",
+      "per-night"
+     ],
+     "sent_as_written": false,
+     "fell_back": true,
+     "handoff": "reservations",
+     "unconfirmed_left": [],
+     "pass": true
+    },
+    "honest": {
+     "caught": [],
+     "sent_as_written": true,
+     "fell_back": false,
+     "handoff": "reservations",
+     "unconfirmed_left": [],
+     "pass": true
+    }
+   }
+  },
+  {
+   "id": "partial-list",
+   "kind": "failed-dependency",
+   "what": "right shape, 1 of 4 room types listed",
+   "state": "failed",
+   "shape_check_accepts": true,
+   "drafts": {
+    "no-rooms": {
+     "caught": [
+      "availability",
+      "handoff"
+     ],
+     "sent_as_written": false,
+     "fell_back": true,
+     "handoff": "reservations",
+     "unconfirmed_left": [],
+     "pass": true
+    },
+    "price": {
+     "caught": [
+      "money",
+      "money",
+      "per-night",
+      "handoff"
+     ],
+     "sent_as_written": false,
+     "fell_back": true,
+     "handoff": "reservations",
+     "unconfirmed_left": [],
+     "pass": true
+    },
+    "honest": {
+     "caught": [],
+     "sent_as_written": true,
+     "fell_back": false,
+     "handoff": "reservations",
+     "unconfirmed_left": [],
+     "pass": true
+    }
+   },
+   "legacy": {
+    "no-rooms": {
+     "caught": [],
+     "sent_as_written": true,
+     "fell_back": false,
+     "handoff": "none",
+     "unconfirmed_left": [
+      "availability"
+     ],
+     "pass": false
+    },
+    "price": {
+     "caught": [],
+     "sent_as_written": true,
+     "fell_back": false,
+     "handoff": "none",
+     "unconfirmed_left": [
+      "money",
+      "money",
+      "per-night"
+     ],
+     "pass": false
+    },
+    "honest": {
+     "caught": [],
+     "sent_as_written": true,
+     "fell_back": false,
+     "handoff": "reservations",
+     "unconfirmed_left": [],
+     "pass": true
+    }
+   }
+  },
+  {
+   "id": "wrong-shape",
+   "kind": "failed-dependency",
+   "what": "a different shape",
+   "state": "failed",
+   "shape_check_accepts": false,
+   "drafts": {
+    "no-rooms": {
+     "caught": [
+      "availability",
+      "handoff"
+     ],
+     "sent_as_written": false,
+     "fell_back": true,
+     "handoff": "reservations",
+     "unconfirmed_left": [],
+     "pass": true
+    },
+    "price": {
+     "caught": [
+      "money",
+      "money",
+      "per-night",
+      "handoff"
+     ],
+     "sent_as_written": false,
+     "fell_back": true,
+     "handoff": "reservations",
+     "unconfirmed_left": [],
+     "pass": true
+    },
+    "honest": {
+     "caught": [],
+     "sent_as_written": true,
+     "fell_back": false,
+     "handoff": "reservations",
+     "unconfirmed_left": [],
+     "pass": true
+    }
+   },
+   "legacy": {
+    "no-rooms": {
+     "caught": [
+      "handoff"
+     ],
+     "sent_as_written": true,
+     "fell_back": false,
+     "handoff": "reservations",
+     "unconfirmed_left": [
+      "availability"
+     ],
+     "pass": false
+    },
+    "price": {
+     "caught": [
+      "money",
+      "money",
+      "per-night",
+      "handoff"
+     ],
+     "sent_as_written": false,
+     "fell_back": true,
+     "handoff": "reservations",
+     "unconfirmed_left": [],
+     "pass": true
+    },
+    "honest": {
+     "caught": [],
+     "sent_as_written": true,
+     "fell_back": false,
+     "handoff": "reservations",
+     "unconfirmed_left": [],
+     "pass": true
+    }
+   }
+  },
+  {
+   "id": "stale-dates",
+   "kind": "failed-dependency",
+   "what": "a cached answer for 26 Feb (same rates)",
+   "state": "failed",
+   "shape_check_accepts": true,
+   "drafts": {
+    "no-rooms": {
+     "caught": [
+      "availability",
+      "handoff"
+     ],
+     "sent_as_written": false,
+     "fell_back": true,
+     "handoff": "reservations",
+     "unconfirmed_left": [],
+     "pass": true
+    },
+    "price": {
+     "caught": [
+      "money",
+      "money",
+      "per-night",
+      "handoff"
+     ],
+     "sent_as_written": false,
+     "fell_back": true,
+     "handoff": "reservations",
+     "unconfirmed_left": [],
+     "pass": true
+    },
+    "honest": {
+     "caught": [],
+     "sent_as_written": true,
+     "fell_back": false,
+     "handoff": "reservations",
+     "unconfirmed_left": [],
+     "pass": true
+    }
+   },
+   "legacy": {
+    "no-rooms": {
+     "caught": [],
+     "sent_as_written": true,
+     "fell_back": false,
+     "handoff": "none",
+     "unconfirmed_left": [
+      "availability"
+     ],
+     "pass": false
+    },
+    "price": {
+     "caught": [],
+     "sent_as_written": true,
+     "fell_back": false,
+     "handoff": "none",
+     "unconfirmed_left": [
+      "money",
+      "money",
+      "per-night"
+     ],
+     "pass": false
+    },
+    "honest": {
+     "caught": [],
+     "sent_as_written": true,
+     "fell_back": false,
+     "handoff": "reservations",
+     "unconfirmed_left": [],
+     "pass": true
+    }
+   }
+  },
+  {
+   "id": "stale-party",
+   "kind": "failed-dependency",
+   "what": "a cached answer for 1 adult",
+   "state": "failed",
+   "shape_check_accepts": true,
+   "drafts": {
+    "no-rooms": {
+     "caught": [
+      "availability",
+      "handoff"
+     ],
+     "sent_as_written": false,
+     "fell_back": true,
+     "handoff": "reservations",
+     "unconfirmed_left": [],
+     "pass": true
+    },
+    "price": {
+     "caught": [
+      "money",
+      "money",
+      "per-night",
+      "handoff"
+     ],
+     "sent_as_written": false,
+     "fell_back": true,
+     "handoff": "reservations",
+     "unconfirmed_left": [],
+     "pass": true
+    },
+    "honest": {
+     "caught": [],
+     "sent_as_written": true,
+     "fell_back": false,
+     "handoff": "reservations",
+     "unconfirmed_left": [],
+     "pass": true
+    }
+   },
+   "legacy": {
+    "no-rooms": {
+     "caught": [],
+     "sent_as_written": true,
+     "fell_back": false,
+     "handoff": "none",
+     "unconfirmed_left": [
+      "availability"
+     ],
+     "pass": false
+    },
+    "price": {
+     "caught": [],
+     "sent_as_written": true,
+     "fell_back": false,
+     "handoff": "none",
+     "unconfirmed_left": [
+      "money",
+      "money",
+      "per-night"
+     ],
+     "pass": false
+    },
+    "honest": {
+     "caught": [],
+     "sent_as_written": true,
+     "fell_back": false,
+     "handoff": "reservations",
+     "unconfirmed_left": [],
+     "pass": true
+    }
+   }
+  },
+  {
+   "id": "no-dates",
+   "kind": "missing-input",
+   "what": "tool call without check_in",
+   "state": "missing",
+   "shape_check_accepts": false,
+   "drafts": {
+    "no-rooms": {
+     "caught": [
+      "availability"
+     ],
+     "sent_as_written": false,
+     "fell_back": true,
+     "handoff": "reservations",
+     "unconfirmed_left": [],
+     "pass": true
+    },
+    "price": {
+     "caught": [
+      "money",
+      "money",
+      "per-night"
+     ],
+     "sent_as_written": false,
+     "fell_back": true,
+     "handoff": "reservations",
+     "unconfirmed_left": [],
+     "pass": true
+    },
+    "honest": {
+     "caught": [],
+     "sent_as_written": true,
+     "fell_back": false,
+     "handoff": "reservations",
+     "unconfirmed_left": [],
+     "pass": true
+    }
+   },
+   "legacy": {
+    "no-rooms": {
+     "caught": [],
+     "sent_as_written": true,
+     "fell_back": false,
+     "handoff": "none",
+     "unconfirmed_left": [
+      "availability"
+     ],
+     "pass": false
+    },
+    "price": {
+     "caught": [
+      "money",
+      "money",
+      "per-night"
+     ],
+     "sent_as_written": false,
+     "fell_back": true,
+     "handoff": "reservations",
+     "unconfirmed_left": [],
+     "pass": true
+    },
+    "honest": {
+     "caught": [],
+     "sent_as_written": true,
+     "fell_back": false,
+     "handoff": "reservations",
+     "unconfirmed_left": [],
+     "pass": true
+    }
+   }
+  },
+  {
+   "id": "no-party",
+   "kind": "missing-input",
+   "what": "tool call without nights or adults",
+   "state": "missing",
+   "shape_check_accepts": false,
+   "drafts": {
+    "no-rooms": {
+     "caught": [
+      "availability"
+     ],
+     "sent_as_written": false,
+     "fell_back": true,
+     "handoff": "reservations",
+     "unconfirmed_left": [],
+     "pass": true
+    },
+    "price": {
+     "caught": [
+      "money",
+      "money",
+      "per-night"
+     ],
+     "sent_as_written": false,
+     "fell_back": true,
+     "handoff": "reservations",
+     "unconfirmed_left": [],
+     "pass": true
+    },
+    "honest": {
+     "caught": [],
+     "sent_as_written": true,
+     "fell_back": false,
+     "handoff": "reservations",
+     "unconfirmed_left": [],
+     "pass": true
+    }
+   },
+   "legacy": {
+    "no-rooms": {
+     "caught": [],
+     "sent_as_written": true,
+     "fell_back": false,
+     "handoff": "none",
+     "unconfirmed_left": [
+      "availability"
+     ],
+     "pass": false
+    },
+    "price": {
+     "caught": [
+      "money",
+      "money",
+      "per-night"
+     ],
+     "sent_as_written": false,
+     "fell_back": true,
+     "handoff": "reservations",
+     "unconfirmed_left": [],
+     "pass": true
+    },
+    "honest": {
+     "caught": [],
+     "sent_as_written": true,
+     "fell_back": false,
+     "handoff": "reservations",
+     "unconfirmed_left": [],
+     "pass": true
+    }
+   }
+  },
+  {
+   "id": "date-in-words",
+   "kind": "missing-input",
+   "what": "check_in 'next Friday'",
+   "state": "missing",
+   "shape_check_accepts": false,
+   "drafts": {
+    "no-rooms": {
+     "caught": [
+      "availability"
+     ],
+     "sent_as_written": false,
+     "fell_back": true,
+     "handoff": "reservations",
+     "unconfirmed_left": [],
+     "pass": true
+    },
+    "price": {
+     "caught": [
+      "money",
+      "money",
+      "per-night"
+     ],
+     "sent_as_written": false,
+     "fell_back": true,
+     "handoff": "reservations",
+     "unconfirmed_left": [],
+     "pass": true
+    },
+    "honest": {
+     "caught": [],
+     "sent_as_written": true,
+     "fell_back": false,
+     "handoff": "reservations",
+     "unconfirmed_left": [],
+     "pass": true
+    }
+   },
+   "legacy": {
+    "no-rooms": {
+     "caught": [],
+     "sent_as_written": true,
+     "fell_back": false,
+     "handoff": "none",
+     "unconfirmed_left": [
+      "availability"
+     ],
+     "pass": false
+    },
+    "price": {
+     "caught": [
+      "money",
+      "money",
+      "per-night"
+     ],
+     "sent_as_written": false,
+     "fell_back": true,
+     "handoff": "reservations",
+     "unconfirmed_left": [],
+     "pass": true
+    },
+    "honest": {
+     "caught": [],
+     "sent_as_written": true,
+     "fell_back": false,
+     "handoff": "reservations",
+     "unconfirmed_left": [],
+     "pass": true
+    }
+   }
+  },
+  {
+   "id": "no-lookup",
+   "kind": "missing-input",
+   "what": "guest gave no dates; the model doesn't look up",
+   "state": "none",
+   "shape_check_accepts": null,
+   "drafts": {
+    "no-rooms": {
+     "caught": [
+      "availability"
+     ],
+     "sent_as_written": false,
+     "fell_back": true,
+     "handoff": "reservations",
+     "unconfirmed_left": [],
+     "pass": true
+    },
+    "price": {
+     "caught": [
+      "money",
+      "money",
+      "per-night"
+     ],
+     "sent_as_written": false,
+     "fell_back": true,
+     "handoff": "reservations",
+     "unconfirmed_left": [],
+     "pass": true
+    },
+    "honest": {
+     "caught": [],
+     "sent_as_written": true,
+     "fell_back": false,
+     "handoff": "reservations",
+     "unconfirmed_left": [],
+     "pass": true
+    }
+   },
+   "legacy": {
+    "no-rooms": {
+     "caught": [],
+     "sent_as_written": true,
+     "fell_back": false,
+     "handoff": "none",
+     "unconfirmed_left": [
+      "availability"
+     ],
+     "pass": false
+    },
+    "price": {
+     "caught": [
+      "money",
+      "money",
+      "per-night"
+     ],
+     "sent_as_written": false,
+     "fell_back": true,
+     "handoff": "reservations",
+     "unconfirmed_left": [],
+     "pass": true
+    },
+    "honest": {
+     "caught": [],
+     "sent_as_written": true,
+     "fell_back": false,
+     "handoff": "reservations",
+     "unconfirmed_left": [],
+     "pass": true
+    }
+   }
+  },
+  {
+   "id": "working",
+   "kind": "control",
+   "what": "a working lookup, rooms free",
+   "state": "verified",
+   "shape_check_accepts": true,
+   "drafts": {
+    "grounded": {
+     "caught": [],
+     "sent_as_written": true,
+     "fell_back": false,
+     "handoff": "none",
+     "unconfirmed_left": [],
+     "pass": true
+    }
+   },
+   "legacy": {
+    "grounded": {
+     "caught": [],
+     "sent_as_written": true,
+     "fell_back": false,
+     "handoff": "none",
+     "unconfirmed_left": [],
+     "pass": true
+    }
+   }
+  },
+  {
+   "id": "sold-out",
+   "kind": "control",
+   "what": "a working lookup, Classic Double sold out 13 Feb",
+   "state": "verified",
+   "shape_check_accepts": true,
+   "drafts": {
+    "grounded": {
+     "caught": [],
+     "sent_as_written": true,
+     "fell_back": false,
+     "handoff": "none",
+     "unconfirmed_left": [],
+     "pass": true
+    }
+   },
+   "legacy": {
+    "grounded": {
+     "caught": [],
+     "sent_as_written": true,
+     "fell_back": false,
+     "handoff": "none",
+     "unconfirmed_left": [],
+     "pass": true
+    }
+   }
+  }
+ ],
+ "cases": 44,
+ "passed": 44,
+ "legacy_passed": 27,
+ "legacy_sent_unconfirmed": [
+  "cut-off/no-rooms",
+  "date-in-words/no-rooms",
+  "empty-list/no-rooms",
+  "empty-object/no-rooms",
+  "error-page/no-rooms",
+  "no-dates/no-rooms",
+  "no-lookup/no-rooms",
+  "no-party/no-rooms",
+  "partial-list/no-rooms",
+  "partial-list/price",
+  "refused/no-rooms",
+  "stale-dates/no-rooms",
+  "stale-dates/price",
+  "stale-party/no-rooms",
+  "stale-party/price",
+  "timeout/no-rooms",
+  "wrong-shape/no-rooms"
+ ],
+ "shape_check_accepts_failed": [
+  "empty-list",
+  "partial-list",
+  "stale-dates",
+  "stale-party"
+ ]
+}

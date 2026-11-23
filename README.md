@@ -147,6 +147,52 @@ Paired exact McNemar tests on ready-to-send (same enquiries, two setups):
 Judge: 44 calls to Claude Sonnet 5.5 ($1.54), 1 unparsed. Replies where the deterministic checks disagreed with the judge: 1, reviewed by hand 1, labels overridden 1. Spend on replies: $3.57.
 <!-- RESULTS:END -->
 
+## Missing inputs and failed lookups (fixtures, added 23 Nov)
+
+The recorded run breaks the booking system one way. [src/enquiry_agent/faults.py](src/enquiry_agent/faults.py) adds
+16 fixtures that go wrong in other ways: 10 booking-system failures (timeout, refused connection, an error page, `{}`,
+cut-off JSON, an empty or partial room list, the wrong shape, a stale answer for other dates or another party size),
+4 searches that lacked an input (no dates, no party size, a date in words, no lookup at all) and 2 controls where the
+lookup works. Each runs through the guarded loop with a scripted model, so it costs nothing and CI replays it. The
+model writes the reply a too-trusting model writes ("we have no rooms free", or the right price from memory), ignores
+the repair request, and in a third draft says honestly that it can't check and hands off.
+
+The guard now sorts every lookup into **verified** (a real answer to this search, including the API's own refusals),
+**missing** (the search lacked an input, so nothing is known yet) or **failed** (no real answer: unparseable, wrong
+shape, an answer for another search, or a room list missing types the API always lists). Only verified answers can
+back a price, a link or "sold out", and a new check stops "no rooms" / "fully booked" unless a verified answer shows a
+sold-out room. Expected result: after a failed or incomplete lookup, nothing unconfirmed reaches the guest and a person
+is asked to confirm; the honest draft and the control drafts go out unchanged.
+
+<!-- FAULTS:START -->
+| Fixture | Kind | Booking system / input | Lookup state | Shape check alone accepts it | Drafts handled as expected | Before (22 Nov guard) | Caught by |
+|---|---|---|---|---|---|---|---|
+| timeout | failed-dependency | no answer in time | failed | no | 3/3 | 2/3 | availability, handoff, money, per-night |
+| refused | failed-dependency | connection refused | failed | no | 3/3 | 2/3 | availability, handoff, money, per-night |
+| error-page | failed-dependency | an HTML error page | failed | no | 3/3 | 2/3 | availability, handoff, money, per-night |
+| empty-object | failed-dependency | {} | failed | no | 3/3 | 2/3 | availability, handoff, money, per-night |
+| cut-off | failed-dependency | JSON cut off part way | failed | no | 3/3 | 2/3 | availability, handoff, money, per-night |
+| empty-list | failed-dependency | right shape, no room types listed | failed | yes | 3/3 | 2/3 | availability, handoff, money, per-night |
+| partial-list | failed-dependency | right shape, 1 of 4 room types listed | failed | yes | 3/3 | 1/3 | availability, handoff, money, per-night |
+| wrong-shape | failed-dependency | a different shape | failed | no | 3/3 | 2/3 | availability, handoff, money, per-night |
+| stale-dates | failed-dependency | a cached answer for 26 Feb (same rates) | failed | yes | 3/3 | 1/3 | availability, handoff, money, per-night |
+| stale-party | failed-dependency | a cached answer for 1 adult | failed | yes | 3/3 | 1/3 | availability, handoff, money, per-night |
+| no-dates | missing-input | tool call without check_in | missing | no | 3/3 | 2/3 | availability, money, per-night |
+| no-party | missing-input | tool call without nights or adults | missing | no | 3/3 | 2/3 | availability, money, per-night |
+| date-in-words | missing-input | check_in 'next Friday' | missing | no | 3/3 | 2/3 | availability, money, per-night |
+| no-lookup | missing-input | guest gave no dates; the model doesn't look up | none | - | 3/3 | 2/3 | availability, money, per-night |
+| working | control | a working lookup, rooms free | verified | yes | 1/1 | 1/1 | - |
+| sold-out | control | a working lookup, Classic Double sold out 13 Feb | verified | yes | 1/1 | 1/1 | - |
+<!-- FAULTS:END -->
+
+From [results/faults.json](results/faults.json). "Before" is the guard as recorded on 22 Nov, re-run on the same
+fixtures: it let "we have no rooms free" through after every failure (an empty answer is not a sold-out night, which is
+exactly the b01 reply in the broken-system run), and it took four well-formed but wrong answers (empty or partial room
+lists, a cached answer for other dates or party size) as real, so it also let the price through for three of them.
+Two notes on "before": the real 22 Nov code would have crashed on a tool call without nights or adults (a `TypeError`,
+fixed here), and it never had to handle a timeout because the booking system ran in-process. The recorded run still
+reproduces exactly with the new guard: none of the 374 recorded conversations hit the new rules.
+
 ## Limitations
 
 - One made-up hotel, 51 enquiries written by me, one sample per reply: the intervals are wide and the hotel is simpler
@@ -168,8 +214,10 @@ Judge: 44 calls to Claude Sonnet 5.5 ($1.54), 1 unparsed. Replies where the dete
 - Whose-contact check: tie each phone number and email to its team so "call events on the reservations number" fails.
 - An `infants` parameter in the lookup, and a test set of party-size edge cases.
 - Several samples per reply and a second judge family, to tighten the intervals and check judge bias.
-- Injected failures beyond the booking lookup: a slow API, a stale cache, a wrong but well-formed answer (the guard's
-  shape check can't see that one).
+- A stale price for the *same* search can't be caught: the fixtures catch stale answers for other dates or party
+  sizes, but the API has no quote timestamp to check freshness against. Add one, then a max-age rule.
+- Re-record the broken-system run with the new failure kinds against the real models (the fixtures use a scripted
+  model, which shows the guard works, not how often a model writes those drafts).
 - A clean API run without account-level instructions.
 
 ## Run it

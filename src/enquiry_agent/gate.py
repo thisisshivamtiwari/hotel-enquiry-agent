@@ -3,7 +3,9 @@
 1. the replay doesn't reproduce the committed results/summary.json exactly (a prompt, data file or check changed
    without a new recorded run), or
 2. a setup breaks a rule in evals/gate.yaml (for example, the guarded setup sends fewer ready replies than the plain
-   tool agent, or any setup leaks the staff code).
+   tool agent, or any setup leaks the staff code), or
+3. the missing-input and failed-dependency fixtures (faults.py) don't reproduce results/faults.json or any case is
+   not handled as expected.
 """
 
 import json
@@ -11,7 +13,7 @@ from pathlib import Path
 
 import yaml
 
-from . import experiment
+from . import experiment, faults
 
 GATE = Path(__file__).resolve().parents[2] / "evals" / "gate.yaml"
 
@@ -54,6 +56,12 @@ def main() -> int:
         return 1
     print(f"replay reproduces results/summary.json ({len(rows)} replies)")
     failures = evaluate(summary, yaml.safe_load(GATE.read_text())["rules"])
+    res = faults.run()
+    if res != json.loads(faults.OUT.read_text()):
+        failures.append("the fault fixtures don't reproduce results/faults.json")
+    if res["passed"] != res["cases"]:
+        failures.append(f"fault fixtures: {res['passed']}/{res['cases']} handled as expected")
+    print(f"fault fixtures: {res['passed']}/{res['cases']} handled as expected")
     for f in failures:
         print("FAIL:", f)
     if not failures:
